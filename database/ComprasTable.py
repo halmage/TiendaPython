@@ -30,7 +30,6 @@ class ComprasTable:
         conexion.close()
 
     def create(self, datos):
-        print(datos)
         # Insertar un nuevo resultado en la tabla 'operaciones'
         conexion = sqlite3.connect("database/tienda.db")
         conexion.execute(
@@ -49,3 +48,11 @@ class ComprasTable:
             )
         )
         conexion.commit()
+
+    def findAll(self):
+        # Buscar todos los resultados de la tabla 'operaciones'
+        conexion = sqlite3.connect("database/tienda.db")
+        cursor = conexion.execute(
+            "SELECT * FROM Compras INNER JOIN Personas ON Compras.persona_id = Personas.id INNER JOIN Articulos ON Compras.articulo_id = Articulos.id"
+        )
+        return cursor.fetchall()

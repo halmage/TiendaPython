@@ -59,7 +59,7 @@ class Main:
                 print("Base de datos creada correctamente")
                 time.sleep(1)
                 system("clear")
-                break
+                continue
             elif self.opcion == "1":
                 # Modulo persona
                 Otros.cargando(self)

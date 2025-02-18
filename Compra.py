@@ -88,6 +88,11 @@ class Compra:
             "total_compra": total_compra,
         }
 
+    def findAll(self):
+        compra_table = ComprasTable()
+        compras = compra_table.findAll()
+        print(compras)
+
     def menu(self):
         anuncio = """
         **********************
@@ -96,7 +101,8 @@ class Compra:
         """
         print(anuncio)
         print("1. Comprar articulos")
-        print("2. Salir")
+        print("2. Visualizar compras de las personas")
+        print("3. Salir")
         # Ingreso de opcion
         self.opcion = input("Elija una opcion: ")
         while self.opcion.isdigit() == False:
@@ -106,19 +112,26 @@ class Compra:
     def operaciones(self):
         while True:
             self.menu()
-            if self.opcion == "2":
+            if self.opcion == "3":
                 # salida del sistema
                 Otros.cargando(self)
                 print("Saliendo de la seccion compra")
                 time.sleep(1)
                 system("clear")
                 break
-            elif self.opcion == "1":
+            if self.opcion == "1":
                 system("clear")
                 datos = self.create()
                 compra_table = ComprasTable()
                 compra_table.create(datos)
                 Otros.cargando(self)
                 print("Datos ingresados correctamente")
+                time.sleep(2)
+                system("clear")
+            elif self.opcion == "2":
+                system("clear")
+                self.findAll()
+                Otros.cargando(self)
+                print("Datos visualizados correctamente")
                 time.sleep(2)
                 system("clear")
