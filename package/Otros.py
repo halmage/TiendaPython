@@ -71,3 +71,10 @@ class Otros:
             # Validar si el usuario quiere seguir actualizando
             condicion = Otros.respuestaSeguir(self, respuesta)
             return condicion
+
+    def continuar(self):
+        # Validar si el usuario quiere continuar
+        print("Presione la tecla enter para continuar...")
+        input()
+        Otros.cargando(self)
+        system("clear")

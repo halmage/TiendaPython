@@ -91,7 +91,32 @@ class Compra:
     def findAll(self):
         compra_table = ComprasTable()
         compras = compra_table.findAll()
-        print(compras)
+        if len(compras) == 0:
+            anuncio = """
+            ******************************
+            |NO HAY COMPRAS EN EL SISTEMA|
+            ******************************
+            """
+            print(anuncio)  # Mensaje de error
+            return
+        anuncio = """
+        *********************************
+        |COMPRAS REALIZADAS POR PERSONAS|
+        *********************************
+        """
+        print(anuncio)
+        for dato in compras:
+            print("*********************************")
+            print(f"Cedula: {dato[0]}")
+            print(f"Persona: {dato[1]} {dato[2]}")
+            print(f"Tlf: {dato[3]}")
+            print(f"Codigo del articulo: {dato[4]}")
+            print(f"Nombre del articulo: {dato[5]}")
+            print(f"Categoria del articulo: {dato[6]}")
+            print(f"Precio del articulo: {dato[7]}")
+            print(f"Cantidad de articulos: {dato[8]}")
+            print(f"Total de la compra: {dato[9]}")
+            print("*********************************")
 
     def menu(self):
         anuncio = """
@@ -131,7 +156,4 @@ class Compra:
             elif self.opcion == "2":
                 system("clear")
                 self.findAll()
-                Otros.cargando(self)
-                print("Datos visualizados correctamente")
-                time.sleep(2)
-                system("clear")
+                Otros.continuar(self)

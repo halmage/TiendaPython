@@ -53,6 +53,19 @@ class ComprasTable:
         # Buscar todos los resultados de la tabla 'operaciones'
         conexion = sqlite3.connect("database/tienda.db")
         cursor = conexion.execute(
-            "SELECT * FROM Compras INNER JOIN Personas ON Compras.persona_id = Personas.id INNER JOIN Articulos ON Compras.articulo_id = Articulos.id"
+            """
+            SELECT Personas.cedula,
+                      Personas.nombre,
+                      Personas.apellido,
+                      Personas.telefono,            
+                      Articulos.codigo,
+                      Articulos.nombre,
+                      Articulos.categoria,
+                      Articulos.precio,
+                      Compras.cantidad,
+                      Compras.total                      
+                      FROM Compras INNER JOIN Personas ON Compras.persona_id = Personas.id 
+                      INNER JOIN Articulos ON Compras.articulo_id = Articulos.id
+                      """
         )
         return cursor.fetchall()
