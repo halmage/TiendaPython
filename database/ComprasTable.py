@@ -49,6 +49,31 @@ class ComprasTable:
         )
         conexion.commit()
 
+    def find(self, cedula):
+        # Buscar un resultado en la tabla 'operaciones' por id
+        conexion = sqlite3.connect("database/tienda.db")
+        cursor = conexion.execute(
+            """
+            SELECT Personas.cedula,
+                      Personas.nombre,
+                      Personas.apellido,
+                      Personas.telefono,            
+                      Articulos.codigo,
+                      Articulos.nombre,
+                      Articulos.categoria,
+                      Articulos.precio,
+                      Compras.cantidad,
+                      Compras.total                      
+                      FROM Compras INNER JOIN Personas ON Compras.persona_id = Personas.id 
+                      INNER JOIN Articulos ON Compras.articulo_id = Articulos.id
+                      WHERE Personas.cedula = {}
+            """.format(
+                cedula
+            )
+        )
+        return cursor.fetchall()
+        conexion.close()
+
     def findAll(self):
         # Buscar todos los resultados de la tabla 'operaciones'
         conexion = sqlite3.connect("database/tienda.db")

@@ -88,6 +88,40 @@ class Compra:
             "total_compra": total_compra,
         }
 
+    def find(self):
+        anuncio = """
+            ****************************************
+            |BUSQUEDA DE LAS COMPRAS DE UNA PERSONA|
+            ****************************************
+            """
+        print(anuncio)
+        cedula = input("Cedula de la persona:")
+        while cedula.isdigit() == False:
+            print("ERROR: la variable cedula tiene que ser numerico")
+            cedula = input("Cedula de la persona:")
+        compra_table = ComprasTable()
+        datos = compra_table.find(cedula)
+        if len(datos) == 0:
+            anuncio = """
+            *******************************************************
+            |NO HAY COMPRAS DE LA PERSONA REGISTRADA EN EL SISTEMA|
+            *******************************************************
+            """
+            print(anuncio)
+        else:
+            for dato in datos:
+                print("*********************************")
+                print(f"Cedula: {dato[0]}")
+                print(f"Persona: {dato[1]} {dato[2]}")
+                print(f"Tlf: {dato[3]}")
+                print(f"Codigo del articulo: {dato[4]}")
+                print(f"Nombre del articulo: {dato[5]}")
+                print(f"Categoria del articulo: {dato[6]}")
+                print(f"Precio del articulo: {dato[7]}")
+                print(f"Cantidad de articulos: {dato[8]}")
+                print(f"Total de la compra: {dato[9]}")
+                print("*********************************")
+
     def findAll(self):
         compra_table = ComprasTable()
         compras = compra_table.findAll()
@@ -126,8 +160,9 @@ class Compra:
         """
         print(anuncio)
         print("1. Comprar articulos")
-        print("2. Visualizar compras de las personas")
-        print("3. Salir")
+        print("2. buscar compras de una persona")
+        print("3. Visualizar compras de las personas")
+        print("4. Salir")
         # Ingreso de opcion
         self.opcion = input("Elija una opcion: ")
         while self.opcion.isdigit() == False:
@@ -137,7 +172,7 @@ class Compra:
     def operaciones(self):
         while True:
             self.menu()
-            if self.opcion == "3":
+            if self.opcion == "4":
                 # salida del sistema
                 Otros.cargando(self)
                 print("Saliendo de la seccion compra")
@@ -154,6 +189,10 @@ class Compra:
                 time.sleep(2)
                 system("clear")
             elif self.opcion == "2":
+                system("clear")
+                self.find()
+                Otros.continuar(self)
+            elif self.opcion == "3":
                 system("clear")
                 self.findAll()
                 Otros.continuar(self)
