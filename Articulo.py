@@ -215,33 +215,35 @@ class Articulo:
 
     def delete(self):
         # Eliminar un registro de la base de datos
-        anuncio = """
-        *******************
-        |ELIMINAR ARTICULO|
-        *******************
-        """
-        print(anuncio)
-        articulo = ArticulosTable()
-        # Ingreso de codigo
-        codigo = input("Ingrese codigo:")
-        while codigo.isdigit() == False:
-            print("ERROR: la variable codigo tiene que ser numerico")
-            codigo = input("codigo:")
-        datos = articulo.find(codigo)
-        if datos == None:  # No hay registros en la base de datos
-            Otros.cargando(self)  # Cargando
-            print("No hay resultados registrados.")
-            Otros.pausa(self)  # Pausa para dar continuacion al sistema
-        else:  # Muestra todos los registros
-            print("El registro:")
-            print(
-                f"codigo:{datos[1]}\nnombre:{datos[2]}\nprecio:{datos[3]}\ncategoria:{datos[4]}\ncantidad:{datos[5]}"
-            )
-            articulo.delete(codigo)
-            Otros.cargando(self)
-            print("Registro eliminado correctamente")
-            time.sleep(2)
-            system("clear")
+        condicion = True
+        while condicion:
+            anuncio = """
+            *******************
+            |ELIMINAR ARTICULO|
+            *******************
+            """
+            print(anuncio)
+            articulo = ArticulosTable()
+            # Ingreso de codigo
+            codigo = input("Ingrese codigo:")
+            while codigo.isdigit() == False:
+                print("ERROR: la variable codigo tiene que ser numerico")
+                codigo = input("codigo:")
+            datos = articulo.find(codigo)
+            if datos == None:  # No hay registros en la base de datos
+                Otros.cargando(self)  # Cargando
+                print("No hay resultados registrados.")
+            else:  # Muestra todos los registros
+                print("El registro:")
+                print(
+                    f"codigo:{datos[1]}\nnombre:{datos[2]}\nprecio:{datos[3]}\ncategoria:{datos[4]}\ncantidad:{datos[5]}"
+                )
+                articulo.delete(codigo)
+                Otros.cargando(self)
+                print("Registro eliminado correctamente")
+                time.sleep(2)
+                system("clear")
+            condicion = Otros.seguirEliminando(self)
 
     def menu(self):
         anuncio = """

@@ -206,33 +206,35 @@ class Persona:
 
     def delete(self):
         # Eliminar un registro de la base de datos
-        anuncio = """
-        *********************
-        |ELIMINAR PERSONA|
-        *********************
-        """
-        print(anuncio)
-        persona = PersonasTable()
-        # Ingreso de cedula
-        cedula = input("Cedula:")
-        while cedula.isdigit() == False:
-            print("ERROR: la variable cedula tiene que ser numerico")
+        condicion = True
+        while condicion:
+            anuncio = """
+            *********************
+            |ELIMINAR PERSONA|
+            *********************
+            """
+            print(anuncio)
+            persona = PersonasTable()
+            # Ingreso de cedula
             cedula = input("Cedula:")
-        datos = persona.find(cedula)
-        if datos == None:  # No hay registros en la base de datos
-            Otros.cargando(self)  # Cargando
-            print("No hay resultados registrados.")
-            Otros.pausa(self)  # Pausa para dar continuacion al sistema
-        else:  # Muestra todos los registros
-            print("El registro:")
-            print(
-                f"cedula:{datos[1]}\nnombre:{datos[2]}\napellido:{datos[3]}\ntelefono:{datos[4]}"
-            )
-            persona.delete(cedula)
-            Otros.cargando(self)
-            print("Registro eliminado correctamente")
-            time.sleep(2)
-            system("clear")
+            while cedula.isdigit() == False:
+                print("ERROR: la variable cedula tiene que ser numerico")
+                cedula = input("Cedula:")
+            datos = persona.find(cedula)
+            if datos == None:  # No hay registros en la base de datos
+                Otros.cargando(self)  # Cargando
+                print("No hay resultados registrados.")
+            else:  # Muestra todos los registros
+                print("El registro:")
+                print(
+                    f"cedula:{datos[1]}\nnombre:{datos[2]}\napellido:{datos[3]}\ntelefono:{datos[4]}"
+                )
+                persona.delete(cedula)
+                Otros.cargando(self)
+                print("Registro eliminado correctamente")
+                time.sleep(2)
+                system("clear")
+            condicion = Otros.seguirEliminando(self)
 
     def menu(self):
         anuncio = """
@@ -244,7 +246,7 @@ class Persona:
         print("1. Ingreso de datos del usuario")
         print("2. Buscar persona")
         print("3. Visualizar datos de las personas")
-        print("4. Actualizar datos de los articulos")
+        print("4. Actualizar datos de las personas")
         print("5. Eliminar persona")
         print("6. Salir")
         # Ingreso de opcion
