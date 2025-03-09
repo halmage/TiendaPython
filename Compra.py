@@ -94,33 +94,37 @@ class Compra:
             |BUSQUEDA DE LAS COMPRAS DE UNA PERSONA|
             ****************************************
             """
-        print(anuncio)
-        cedula = input("Cedula de la persona:")
-        while cedula.isdigit() == False:
-            print("ERROR: la variable cedula tiene que ser numerico")
-            cedula = input("Cedula de la persona:")
-        compra_table = ComprasTable()
-        datos = compra_table.find(cedula)
-        if len(datos) == 0:
-            anuncio = """
-            *******************************************************
-            |NO HAY COMPRAS DE LA PERSONA REGISTRADA EN EL SISTEMA|
-            *******************************************************
-            """
+        respuesta = True
+        while respuesta:
             print(anuncio)
-        else:
-            for dato in datos:
-                print("*********************************")
-                print(f"Cedula: {dato[0]}")
-                print(f"Persona: {dato[1]} {dato[2]}")
-                print(f"Tlf: {dato[3]}")
-                print(f"Codigo del articulo: {dato[4]}")
-                print(f"Nombre del articulo: {dato[5]}")
-                print(f"Categoria del articulo: {dato[6]}")
-                print(f"Precio del articulo: {dato[7]}")
-                print(f"Cantidad de articulos: {dato[8]}")
-                print(f"Total de la compra: {dato[9]}")
-                print("*********************************")
+            cedula = input("Cedula de la persona:")
+            while cedula.isdigit() == False:
+                print("ERROR: la variable cedula tiene que ser numerico")
+                cedula = input("Cedula de la persona:")
+            compra_table = ComprasTable()
+            datos = compra_table.find(cedula)
+            if len(datos) == 0:
+                anuncio = """
+                *******************************************************
+                |NO HAY COMPRAS DE LA PERSONA REGISTRADA EN EL SISTEMA|
+                *******************************************************
+                """
+                print(anuncio)
+            else:
+                for dato in datos:
+                    print("*********************************")
+                    print(f"Cedula: {dato[0]}")
+                    print(f"Persona: {dato[1]} {dato[2]}")
+                    print(f"Tlf: {dato[3]}")
+                    print(f"Codigo del articulo: {dato[4]}")
+                    print(f"Nombre del articulo: {dato[5]}")
+                    print(f"Categoria del articulo: {dato[6]}")
+                    print(f"Precio del articulo: {dato[7]}")
+                    print(f"Cantidad de articulos: {dato[8]}")
+                    print(f"Total de la compra: {dato[9]}")
+                    print("*********************************")
+            consulta = input("Quieres seguir buscando una compra (y/n):")
+            respuesta = Otros.respuestaSeguir(self, consulta)
 
     def findAll(self):
         compra_table = ComprasTable()
@@ -191,7 +195,6 @@ class Compra:
             elif self.opcion == "2":
                 system("clear")
                 self.find()
-                Otros.continuar(self)
             elif self.opcion == "3":
                 system("clear")
                 self.findAll()

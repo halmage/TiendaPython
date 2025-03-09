@@ -40,14 +40,14 @@ class Otros:
                 )
         return respuesta
 
-    def respuestaSeguir(self, respuesta):
-        # Validar si el usuario quiere seguir actualizando
-        if respuesta == "y" or respuesta == "Y":  # (y|Y) si queiere seguir actualizando
+    def respuestaSeguir(self, consulta):
+        # Validar si el usuario quiere seguir operando
+        if consulta == "y" or consulta == "Y":  # (y|Y) si queiere seguir actualizando
             Otros.cargando(self)
             system("clear")
             return True
         elif (
-            respuesta == "n" or respuesta == "N"
+            consulta == "n" or consulta == "N"
         ):  # (n|N) si no quiere seguir actualizando
             Otros.cargando(self)
             system("clear")
